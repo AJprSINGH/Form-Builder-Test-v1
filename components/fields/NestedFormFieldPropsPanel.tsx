@@ -3,24 +3,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
+import { GetFormsNew } from "@/actions/form";
 
-// Assume this function exists and fetches published forms
-async function fetchPublishedForms(): Promise<{ id: string; name: string }[]> {
-    try {
-        const response = await fetch("/api/published-forms");
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const forms = await response.json();
-        return forms.map((form: { id: number; name: string }) => ({
-            id: String(form.id),
-            name: form.name,
-        }));
-    } catch (error) {
-        console.error("Error fetching published forms:", error);
-        return [];
-    }
-}
 
 // Add this function to fetch form fields
 async function fetchFormFields(formId: string): Promise<any[]> {
@@ -69,15 +53,20 @@ export default function NestedFormFieldPropsPanel({
 
     useEffect(() => {
         const loadForms = async () => {
-            try {
-                const forms = await fetchPublishedForms();
-                setPublishedForms(forms);
-            } catch (error) {
-                console.error("Error fetching published forms:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    try {
+        const formsData = await GetFormsNew(); // No need to call .json() anymore
+        setPublishedForms(
+            formsData.map((form: { id: number; name: string }) => ({
+                id: String(form.id),
+                name: form.name,
+            }))
+        );
+    } catch (error) {
+        console.error("Error fetching published forms:", error);
+    } finally {
+        setLoading(false);
+    }
+};
         loadForms();
     }, []);
 
