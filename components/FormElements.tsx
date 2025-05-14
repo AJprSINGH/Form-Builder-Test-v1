@@ -11,9 +11,11 @@ import { TextFieldFormElement } from "./fields/TextField";
 import { TitleFieldFormElement } from "./fields/TitleField";
 import { NestedFormFieldFormElement } from "./fields/NestedFormField";
 import { ASPFieldFormElement } from "./fields/ASPField";
-//import { RadioFieldFormElement } from "./fields/RadioField";
-//import { TimeFieldFormElement } from "./fields/TimeField";
 import { NestedFormFieldFormElement as NestedFormElement } from "./fields/NestedFormField";
+import { RadioFieldFormElement } from "./fields/RadioField";
+import { DateTimeFieldFormElement } from "./fields/DateTimeField";
+import { FileFieldFormElement } from "./fields/FileField";
+
 
 
 export type ElementsType =
@@ -29,10 +31,11 @@ export type ElementsType =
   | "DateField"
   | "SelectField"
   | "CheckboxField"
+  | "RadioField"
+  | "DateTimeField"
+  | "FileField"
   | "NestedFormField"
   | "NestedForm"
-//  | "RadioField"
-// | "TimeField";
 
 export type SubmitFunction = (key: string, value: string) => void;
 
@@ -85,8 +88,9 @@ export const FormElements: FormElementsType = {
   DateField: DateFieldFormElement,
   SelectField: SelectFieldFormElement,
   CheckboxField: CheckboxFieldFormElement,
+  RadioField: RadioFieldFormElement,
+  DateTimeField: DateTimeFieldFormElement,
+  FileField: FileFieldFormElement,
   NestedFormField: NestedFormFieldFormElement,
   NestedForm: NestedFormElement,
-//  RadioField: RadioFieldFormElement,
-//  TimeField: TimeFieldFormElement,
 };
