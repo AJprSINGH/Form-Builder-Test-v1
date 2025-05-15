@@ -1,6 +1,5 @@
 "use client";
 
-import { MdTextFields } from "react-icons/md";
 import { ElementsType, FormElement, FormElementInstance } from "../FormElements";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -22,18 +21,8 @@ import {
 } from "../ui/form";
 import { Switch } from "../ui/switch";
 import { cn } from "@/lib/utils";
-
-import { format } from "date-fns";
 import { CalendarIcon } from "@radix-ui/react-icons";
-
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
 import { Button } from "../ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-
 const type: ElementsType = "TimeField";
 
 const extraAttributes = {
@@ -128,7 +117,7 @@ function FormComponent({
     const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = event.target.value;
         setValue(newValue);
-        
+
         if (submitValue) {
             // Convert 24h format to 12h AM/PM format
             const [hours, minutes] = newValue.split(':');
@@ -136,7 +125,7 @@ function FormComponent({
             const ampm = parsedHours >= 12 ? 'PM' : 'AM';
             const twelveHour = parsedHours % 12 || 12; // Convert 0 to 12 AM
             const displayTime = `${twelveHour}:${minutes} ${ampm}`;
-            
+
             submitValue(element.id, displayTime);
         }
     };
