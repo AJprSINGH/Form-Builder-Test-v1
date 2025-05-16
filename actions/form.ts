@@ -285,3 +285,37 @@ export async function GetFormWithSubmissions(id: number) {
     },
   });
 }
+export async function GetReportsNew() {
+  const user = await currentUser();
+  if (!user) {
+    throw new UserNotFoundErr();
+  }
+  console.log("Entered Reports!!");
+
+  const reports = await prisma.report.findMany({
+    where: {
+      form: {
+        userId: user.id,
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      form: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+  console.log(reports);
+  return reports.map((report) => ({
+    id: report.id,
+    name: report.name,
+    formId: report.formId,
+    reportUrl: report.reportUrl,
+    createdAt: report.createdAt,
+    formName: report.form?.name,
+  }));
+}

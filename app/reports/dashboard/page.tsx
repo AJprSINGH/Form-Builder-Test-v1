@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import { format } from 'date-fns';
-
+import { GetReportsNew } from "@/actions/form";
 interface Report {
   id: number;
   name: string;
@@ -22,8 +22,8 @@ export default function ReportsDashboardPage() {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const res = await axios.get('/api/reports');
-        setReports(res.data);
+        const res = await GetReportsNew();
+        setReports(res);
         setLoading(false);
       } catch (err) {
         console.error('Error fetching reports:', err);
@@ -105,7 +105,7 @@ export default function ReportsDashboardPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <Link 
+                    <Link
                       href={`/reports/${report.reportUrl}`}
                       className="text-blue-600 hover:text-blue-900 mr-4"
                     >
