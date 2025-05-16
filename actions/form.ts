@@ -315,7 +315,7 @@ export async function GetReportsNew() {
     name: report.name,
     formId: report.formId,
     reportUrl: report.reportUrl,
-    createdAt: report.createdAt,
+    createdAt: report.createdAt.toISOString(),
     formName: report.form?.name,
   }));
 }
