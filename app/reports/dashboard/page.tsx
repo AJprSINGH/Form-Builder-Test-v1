@@ -105,14 +105,14 @@ export default function ReportsDashboardPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <Link
-                      href={`/reports/${report.reportUrl}`}
+                      href={`/reports_new/${report.reportUrl}`}
                       className="text-blue-600 hover:text-blue-900 mr-4"
                     >
                       View
                     </Link>
                     <button
                       onClick={() => {
-                        navigator.clipboard.writeText(`${window.location.origin}/reports/${report.reportUrl}`);
+                        navigator.clipboard.writeText(`${window.location.origin}/reports_new/${report.reportUrl}`);
                         alert('Report URL copied to clipboard!');
                       }}
                       className="text-green-600 hover:text-green-900"

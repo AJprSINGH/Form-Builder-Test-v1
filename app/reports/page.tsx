@@ -93,7 +93,7 @@ export default function ReportsPage() {
             });
 
             if (res.data.reportUrl) {
-                router.push(`/reports/${res.data.reportUrl}`);
+                router.push(`/reports_new/${res.data.reportUrl}`);
             }
         } catch (error) {
             console.error('Error publishing report:', error);
