@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import ChartRenderer from '@/components/ChartRenderer';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { GetFormsNew } from "@/actions/form";
 
 interface FormField {
     id: string;
@@ -28,8 +29,9 @@ export default function ReportsPage() {
         // Fetch published forms
         const fetchForms = async () => {
             try {
-                const res = await axios.get('/api/published-forms');
-                setForms(res.data);
+                const res = await GetFormsNew();
+                console.log("entered published forms!!");
+                setForms(res);
             } catch (error) {
                 console.error('Error fetching forms:', error);
             }
@@ -89,7 +91,7 @@ export default function ReportsPage() {
                 yKey,
                 chartType
             });
-            
+
             if (res.data.reportUrl) {
                 router.push(`/reports/${res.data.reportUrl}`);
             }
@@ -143,18 +145,18 @@ export default function ReportsPage() {
                 <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={generateReport}>
                     Generate Report
                 </button>
-                
+
                 {chartData.length > 0 && (
                     <div className="mt-4 space-y-4">
                         <div className="flex gap-4">
-                            <input 
-                                type="text" 
-                                placeholder="Enter report name" 
+                            <input
+                                type="text"
+                                placeholder="Enter report name"
                                 className="flex-1 p-2 border rounded"
                                 value={reportName}
                                 onChange={(e) => setReportName(e.target.value)}
                             />
-                            <button 
+                            <button
                                 className="px-4 py-2 bg-green-600 text-white rounded disabled:bg-gray-400"
                                 onClick={publishReport}
                                 disabled={isPublishing || !reportName}
